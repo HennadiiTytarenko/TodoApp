@@ -3,7 +3,7 @@ import User from '../models/User';
 
 export default class UserApi {
 	async signup(request: APIRequestContext, user: User) {
-		return await request.post('/api/v1/users/register', {
+		return await request.post(process.env.BASE_URL + '/api/v1/users/register', {
 			data: {
 				email: user.getEmail(),
 				password: user.getPassword(),

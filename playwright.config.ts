@@ -1,3 +1,5 @@
+import "dotenv/config";
+import { env } from "./env";
 import { defineConfig, devices } from '@playwright/test';
 
 /**
@@ -20,17 +22,24 @@ export default defineConfig({
 	/* Opt out of parallel tests on CI. */
 	workers: process.env.CI ? 1 : undefined,
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
-	reporter: 'allure-playwright',
+	//reporter: 'allure-playwright',
+	reporter: [
+		['list'],
+		['html'],
+	],
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
-		baseURL: 'https://qacart-todo.herokuapp.com',
+		baseURL: env.BASE_URL,
 		/* Base URL to use in actions like `await page.goto('/')`. */
 		// baseURL: 'http://127.0.0.1:3000',
 
 		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 		trace: 'on-first-retry',
 		video: 'on',
-		screenshot: 'on',
+		screenshot: {
+			mode: "only-on-failure",
+			fullPage: true
+		}
 	},
 
 	/* Configure projects for major browsers */
@@ -38,6 +47,13 @@ export default defineConfig({
 		{
 			name: 'chromium',
 			use: { ...devices['Desktop Chrome'] },
+			//grep: [new RegExp('@Smoke')]
+		},
+		{
+			name: 'Mobile Safari',
+			use: {
+				...devices['iPhone 13'],
+			},
 		},
 
 		/* Test against mobile viewports. */

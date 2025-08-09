@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "smoke": "npx playwright test --grep @Smoke"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
-    "@playwright/test": "^1.35.1",
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^22.10.1",
     "allure-playwright": "^2.4.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "envalid": "^8.1.0"
   }
 }
