@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "smoke": "npx playwright test --grep @Smoke"
+    "smoke": "npx playwright test --grep @Smoke",
+    "test": "npx playwright test --grep @Smoke"
   },
   "keywords": [],
   "author": "",
